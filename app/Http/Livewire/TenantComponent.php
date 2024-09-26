@@ -30,13 +30,13 @@ class TenantComponent extends Component
                 // Actualizamos el ID solo si es diferente al original
                 if ($this->tenant_id !== $this->original_id) {
                     $tenant->update(['id' => $this->tenant_id]);
-                    $tenant->domains()->update(['domain' => $this->tenant_id . '.' . env('DOMINIO', 'fortitenant.test')]);
+                    $tenant->domains()->update(['domain' => $this->tenant_id . '.' . env('DOMINIO', 'maddicert.test')]);
                 }
             }
         } else {
             // Si no hay original_id, creamos un nuevo tenant
             $tenant = Tenant::create(['id' => $this->tenant_id]);
-            $tenant->domains()->create(['domain' => $this->tenant_id . '.' . env('DOMINIO', 'fortitenant.test')]);
+            $tenant->domains()->create(['domain' => $this->tenant_id . '.' . env('DOMINIO', 'maddicert.test')]);
         }
 
         // Resetear el formulario y ocultarlo después de guardar

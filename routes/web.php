@@ -28,7 +28,13 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-    Route::get('/tenants', TenantComponent::class)->name('tenants');
 });
 
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
 
+    Route::get('/tenants', TenantComponent::class)->name('tenants');
+});
