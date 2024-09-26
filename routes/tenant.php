@@ -2,10 +2,14 @@
 
 declare(strict_types=1);
 
+use App\Models\Tsolicitante;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\BarrioComponent;
 use App\Http\Livewire\GeneroComponent;
 use App\Http\Livewire\NestudioComponent;
+use App\Http\Livewire\SolicitudComponent;
 use App\Http\Livewire\TdocumentoComponent;
+use App\Http\Livewire\TsolicitanteComponent;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -43,6 +47,9 @@ Route::middleware([
         Route::get('documento', TdocumentoComponent::class)->name('documento');
         Route::get('genero', GeneroComponent::class)->name('genero');
         Route::get('nestudio', NestudioComponent::class)->name('nestudio');
+        Route::get('tsolicitante', TsolicitanteComponent::class)->name('tsolicitante');
+        Route::get('barrio', BarrioComponent::class)->name('barrio');
+        Route::get('solicitudes', SolicitudComponent::class)->name('solicitudes');
 
     });
 });

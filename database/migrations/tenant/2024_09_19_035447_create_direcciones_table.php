@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -13,11 +12,21 @@ return new class extends Migration
     {
         Schema::create('direcciones', function (Blueprint $table) {
             $table->id();
-            $table->string('direccion', 100);
-            $table->string('conjunto',50)->nullable();
-            $table->string('casa/apto',50)->nullable();
-            $table->unsignedBigInteger('barrio_id');
+            $table->string('tipoViaPrimaria')->nullable(); // Calle, Carrera, etc.
+            $table->string('numeroViaPrincipal')->nullable();
+            $table->string('letraViaPrincipal')->nullable();
+            $table->string('bis')->nullable();
+            $table->string('letraBis')->nullable();
+            $table->string('cuadranteViaPrincipal')->nullable();
+            $table->string('numeroViaGeneradora')->nullable();
+            $table->string('letraViaGeneradora')->nullable();
+            $table->string('numeroPlaca')->nullable();
+            $table->string('cuadranteViaGeneradora')->nullable();
+            $table->unsignedBigInteger('barrio_id'); // Relación con barrio
             $table->timestamps();
+
+            // Definir la clave foránea
+            $table->foreign('barrio_id')->references('id')->on('barrios')->onDelete('cascade');
         });
     }
 

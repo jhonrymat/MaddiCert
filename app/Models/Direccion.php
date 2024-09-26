@@ -9,22 +9,32 @@ class Direccion extends Model
 {
     use HasFactory;
 
+    protected $table = 'direcciones';
+
     protected $fillable = [
-        'direccion',
-        'conjunto',
-        'casa_apto',  // Recuerda reemplazar el campo 'casa/apto' por 'casa_apto'
-        'barrio_id'
+        'tipoViaPrimaria',
+        'numeroViaPrincipal',
+        'letraViaPrincipal',
+        'bis',
+        'letraBis',
+        'cuadranteViaPrincipal',
+        'numeroViaGeneradora',
+        'letraViaGeneradora',
+        'numeroPlaca',
+        'cuadranteViaGeneradora',
+        'barrio_id' // Clave foránea relacionada con Barrios
     ];
 
+    // Relación con la tabla Barrio
     public function barrio()
     {
         return $this->belongsTo(Barrio::class, 'barrio_id');
     }
 
-    // Si las direcciones están relacionadas con las solicitudes
-    public function solicitudes()
+    // Relación con la tabla Solicitudes si aplica (uno a uno)
+    public function solicitud()
     {
-        return $this->hasMany(Solicitud::class, 'direccion');
+        return $this->hasOne(Solicitud::class);
     }
 
 }

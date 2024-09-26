@@ -45,9 +45,18 @@
                                 <x-dropdown-link href="{{ route('nestudio') }}">
                                     {{ __('Nivel de estudios') }}
                                 </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('tsolicitante') }}">
+                                    {{ __('Tipo de solicitante') }}
+                                </x-dropdown-link>
+                                <x-dropdown-link href="{{ route('barrio') }}">
+                                    {{ __('Barrios') }}
+                                </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
+                    <x-nav-link href="{{ route('solicitudes') }}" :active="request()->routeIs('solicitudes')">
+                        {{ __('Solicitudes') }}
+                    </x-nav-link>
                 </div>
             </div>
 

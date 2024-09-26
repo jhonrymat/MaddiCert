@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('barrios', function (Blueprint $table) {
             $table->id();
             $table->string('nombreBarrio', 100);
-            $table->string('upz', 50);
+            $table->string('unidad', 50);
+            $table->string('numero', 50);
             $table->string('tipo', 50);
-            $table->string('sector', 50);
             $table->timestamps();
         });
 

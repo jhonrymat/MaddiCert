@@ -9,7 +9,7 @@ class Barrio extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombreBarrio', 'upz', 'tipo', 'sector',
+        'nombreBarrio', 'unidad', 'numero', 'tipo'
     ];
 
     public function solicitudes()
