@@ -15,6 +15,7 @@
                     <x-nav-link href="{{ route('dashboard.tenancy') }}" :active="request()->routeIs('dashboard.tenancy')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @role('admin')
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         <x-dropdown width="48">
                             <x-slot name="trigger">
@@ -57,6 +58,7 @@
                     <x-nav-link href="{{ route('solicitudes') }}" :active="request()->routeIs('solicitudes')">
                         {{ __('Solicitudes') }}
                     </x-nav-link>
+                    @endrole
                 </div>
             </div>
 

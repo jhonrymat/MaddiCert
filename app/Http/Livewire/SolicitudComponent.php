@@ -10,7 +10,12 @@ use Livewire\WithFileUploads; // Para manejar la subida de archivos
 class SolicitudComponent extends Component
 {
     use WithFileUploads;
-
+    public function mount()
+    {
+        if (!auth()->user()->can('solicitudes')) {
+            abort(403, 'No tienes acceso a esta página.');
+        }
+    }
     public $solicitud_id;
     public $fechaSolicitud;
     public $numeroIdentificacion_id;
@@ -33,6 +38,8 @@ class SolicitudComponent extends Component
     ];
 
     protected $listeners = ['edit', 'delete'];
+
+
 
     public function save()
     {

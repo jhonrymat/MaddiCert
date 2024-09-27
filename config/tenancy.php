@@ -194,7 +194,7 @@ return [
      * Parameters used by the tenants:seed command.
      */
     'seeder_parameters' => [
-        '--class' => 'DatabaseSeeder', // root seeder class
-        // '--force' => true,
+        '--force' => true, // This needs to be true to run migrations in production.
+        '--class' => 'Database\\Seeders\\tenant\\DatabaseSeeder',
     ],
 ];

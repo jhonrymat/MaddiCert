@@ -18,6 +18,13 @@ class TenantComponent extends Component
 
     protected $listeners = ['editTenant', 'deleteTenant'];
 
+    public function mount()
+    {
+        if (!auth()->user()->can('tenants')) {
+            abort(403, 'No tienes acceso a esta página.');
+        }
+    }
+
     public function save()
     {
         // Validamos los datos

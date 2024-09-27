@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\TenantComponent;
 use App\Http\Controllers\TenantController;
@@ -36,5 +37,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
 
-    Route::get('/tenants', TenantComponent::class)->name('tenants');
+    Route::middleware(['can:tenants'])->get('tenants', TenantComponent::class)->name('tenants');
+
 });

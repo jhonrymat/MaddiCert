@@ -13,7 +13,12 @@ class BarrioComponent extends Component
     public $numero;  // numero
     public $tipo;  // Tipo: Barrio, Vereda, etc.
     public $showForm = false; // Control para mostrar/ocultar el formulario
-
+    public function mount()
+    {
+        if (!auth()->user()->can('solicitudes')) {
+            abort(403, 'No tienes acceso a esta página.');
+        }
+    }
     // Validación básica
     protected $rules = [
         'nombreBarrio' => 'required|string|max:255',

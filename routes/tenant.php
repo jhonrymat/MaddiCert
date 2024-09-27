@@ -44,12 +44,12 @@ Route::middleware([
             return view('dashboard-tenancy');
         })->name('dashboard.tenancy');
 
-        Route::get('documento', TdocumentoComponent::class)->name('documento');
-        Route::get('genero', GeneroComponent::class)->name('genero');
-        Route::get('nestudio', NestudioComponent::class)->name('nestudio');
-        Route::get('tsolicitante', TsolicitanteComponent::class)->name('tsolicitante');
-        Route::get('barrio', BarrioComponent::class)->name('barrio');
-        Route::get('solicitudes', SolicitudComponent::class)->name('solicitudes');
-
     });
+
+    Route::middleware(['can:documento'])->get('documento', TdocumentoComponent::class)->name('documento');
+    Route::middleware(['can:genero'])->get('genero', GeneroComponent::class)->name('genero');
+    Route::middleware(['can:nestudio'])->get('nestudio', NestudioComponent::class)->name('nestudio');
+    Route::middleware(['can:tsolicitante'])->get('tsolicitante', TsolicitanteComponent::class)->name('tsolicitante');
+    Route::middleware(['can:barrio'])->get('barrio', BarrioComponent::class)->name('barrio');
+    Route::middleware(['can:solicitudes'])->get('solicitudes', SolicitudComponent::class)->name('solicitudes');
 });
