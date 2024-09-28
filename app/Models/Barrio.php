@@ -11,6 +11,7 @@ class Barrio extends Model
     protected $fillable = [
         'nombreBarrio', 'unidad', 'numero', 'tipo'
     ];
+    
 
     public function solicitudes()
     {

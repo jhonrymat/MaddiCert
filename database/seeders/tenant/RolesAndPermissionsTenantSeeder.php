@@ -22,17 +22,29 @@ class RolesAndPermissionsTenantSeeder extends Seeder
 
 
         // Crear o asegurarse de que los permisos existen
-        $permissions = [
+        $permissionsAdmin = [
             'documento',
             'genero',
             'nestudio',
             'tsolicitante',
             'barrio',
             'solicitudes',
+            'roles',
+            'permisos',
+        ];
+        $permissionsUser = [
+            'formulario',
         ];
 
         // Crear los permisos
-        foreach ($permissions as $permission) {
+        foreach ($permissionsAdmin as $permission) {
+            Permission::firstOrCreate([
+                'name' => $permission,
+                'guard_name' => 'web',
+            ]);
+        }
+
+        foreach ($permissionsUser as $permission) {
             Permission::firstOrCreate([
                 'name' => $permission,
                 'guard_name' => 'web',
@@ -45,25 +57,49 @@ class RolesAndPermissionsTenantSeeder extends Seeder
             'guard_name' => 'web',
         ]);
 
+        $userRole = Role::firstOrCreate([
+            'name' => 'user',
+            'guard_name' => 'web',
+        ]);
+
         // Asignar todos los permisos al rol de administrador
-        $adminRole->syncPermissions($permissions);
+        $adminRole->syncPermissions($permissionsAdmin);
+        // Asignar todos los permisos al rol de administrador
+        $userRole->syncPermissions($permissionsUser);
 
         // Crear el usuario administrador
-        $adminUser = User::firstOrCreate(
-            ['email' => 'jhonrymat@gmail.com'],
+        $admin = User::firstOrCreate(
+            ['email' => 'admin@gmail.com'],
             [
-                'name' => 'jhon matoma',
+                'name' => 'Administrador',
+                'password' => Hash::make('1q2w3e4r'),
+                'email_verified_at' => now(),
+            ]
+        );
+        // Crear el usuario user
+        $user = User::firstOrCreate(
+            ['email' => 'usuario@gmail.com'],
+            [
+                'name' => 'Usuario',
                 'password' => Hash::make('1q2w3e4r'),
                 'email_verified_at' => now(),
             ]
         );
 
         // Asignar el rol de administrador al usuario
-        $adminUser->assignRole('admin');
+        $admin->assignRole('admin');
+        $user->assignRole('user');
 
-        // Crear un equipo para el usuario
-        $team = Team::firstOrCreate(
-            ['user_id' => $adminUser->id, 'name' => 'Jhon\'s Team'],
+        // Crear un equipo para el Administrador
+        $teamadmin = Team::firstOrCreate(
+            ['user_id' => $admin->id, 'name' => 'Admin\'s Team'],
+            [
+                'personal_team' => true,
+            ]
+        );
+
+        $teamuser = Team::firstOrCreate(
+            ['user_id' => $user->id, 'name' => 'Usuario\'s Team'],
             [
                 'personal_team' => true,
             ]

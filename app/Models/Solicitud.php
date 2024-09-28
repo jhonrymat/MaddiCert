@@ -11,14 +11,12 @@ class Solicitud extends Model
 
     protected $table = 'solicitudes';
     protected $fillable = [
-        'fechaSolicitud',
+        'id_solicitante',
         'numeroIdentificacion',
-        'fechaActual',
         'id_barrio',
         'direccion',
         'ubicacion',
         'evidenciaPDF',
-        'id_solicitante'
     ];
 
     public function solicitante()

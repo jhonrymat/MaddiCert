@@ -3,11 +3,14 @@
 declare(strict_types=1);
 
 use App\Models\Tsolicitante;
+use App\Http\Livewire\RolesComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\BarrioComponent;
 use App\Http\Livewire\GeneroComponent;
 use App\Http\Livewire\NestudioComponent;
+use App\Http\Livewire\PermisosComponent;
 use App\Http\Livewire\SolicitudComponent;
+use App\Http\Livewire\FormularioComponent;
 use App\Http\Livewire\TdocumentoComponent;
 use App\Http\Livewire\TsolicitanteComponent;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
@@ -52,4 +55,7 @@ Route::middleware([
     Route::middleware(['can:tsolicitante'])->get('tsolicitante', TsolicitanteComponent::class)->name('tsolicitante');
     Route::middleware(['can:barrio'])->get('barrio', BarrioComponent::class)->name('barrio');
     Route::middleware(['can:solicitudes'])->get('solicitudes', SolicitudComponent::class)->name('solicitudes');
+    Route::middleware(['can:roles'])->get('roles', RolesComponent::class)->name('roles');
+    Route::middleware(['can:permisos'])->get('permisos', PermisosComponent::class)->name('permisos');
+    Route::middleware(['can:formulario'])->get('formulario', FormularioComponent::class)->name('formulario');
 });

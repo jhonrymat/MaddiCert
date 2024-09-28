@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('solicitudes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_solicitante');
-            $table->timestamp('fechaSolicitud');
             $table->string('numeroIdentificacion', 50);
-            $table->timestamp('fechaActual');
             $table->unsignedBigInteger('id_barrio');
             $table->string('direccion', 100);
             $table->string('ubicacion', 100);

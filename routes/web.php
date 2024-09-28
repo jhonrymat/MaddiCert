@@ -37,6 +37,6 @@ Route::middleware([
     'verified'
 ])->group(function () {
 
-    Route::middleware(['can:tenants'])->get('tenants', TenantComponent::class)->name('tenants');
+    Route::get('tenants', TenantComponent::class)->name('tenants');
 
 });

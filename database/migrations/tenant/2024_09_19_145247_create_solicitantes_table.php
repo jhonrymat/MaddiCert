@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('solicitantes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->timestamp('fechaRegistro');
             $table->string('nombre_1', 100);
             $table->string('nombre_2', 100)->nullable();
             $table->string('apellido_1', 100);
@@ -29,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('id_nivelEstudio')->nullable();
             $table->unsignedBigInteger('id_genero')->nullable();
             $table->string('ocupacion', 100)->nullable();
-            // $table->string('rol', 100)->nullable(); // Rol podría tener una relación, pero dependerá de tu modelo
             $table->timestamps();
 
             // Relación con otras tablas

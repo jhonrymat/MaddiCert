@@ -9,10 +9,21 @@ class Solicitante extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre_1', 'nombre_2', 'apellido_1', 'apellido_2', 'correoElectronico',
-        'telefonoContacto', 'numeroIdentificacion', 'ciudadExpedicion', 'fechaNacimiento',
-        'ocupacion', 'rol', 'user_id', 'id_tipoSolicitante', 'id_tipoDocumento',
-        'id_nivelEstudio', 'id_genero'
+        'user_id',
+        'nombre_1',
+        'nombre_2',
+        'apellido_1',
+        'apellido_2',
+        'correoElectronico',
+        'telefonoContacto',
+        'id_tipoSolicitante',
+        'id_tipoDocumento',
+        'numeroIdentificacion',
+        'ciudadExpedicion',
+        'fechaNacimiento',
+        'id_nivelEstudio',
+        'id_genero',
+        'ocupacion',
     ];
 
     public function user()

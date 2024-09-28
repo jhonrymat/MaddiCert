@@ -42,4 +42,6 @@
 
         @livewireScripts
     </body>
+    <!-- Footer Component -->
+    <x-footer />
 </html>
