@@ -13,6 +13,7 @@ use App\Http\Livewire\SolicitudComponent;
 use App\Http\Livewire\FormularioComponent;
 use App\Http\Livewire\TdocumentoComponent;
 use App\Http\Livewire\TsolicitanteComponent;
+use App\Http\Controllers\TenantProfileController;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
@@ -58,4 +59,9 @@ Route::middleware([
     Route::middleware(['can:roles'])->get('roles', RolesComponent::class)->name('roles');
     Route::middleware(['can:permisos'])->get('permisos', PermisosComponent::class)->name('permisos');
     Route::middleware(['can:formulario'])->get('formulario', FormularioComponent::class)->name('formulario');
+
+     // Ruta personalizada para el perfil del usuario en tenants
+     Route::get('user/profiles', function () {
+        return view('tenancy.profile.show');// Asegúrate de tener una vista específica para tenants
+    })->name('profile.show');
 });

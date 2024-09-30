@@ -38,5 +38,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::get('tenants', TenantComponent::class)->name('tenants');
+    // perfil de usuario jetstreams
+    Route::get('user/profiles', [UserProfileController::class, 'show'])->name('profile.show');
 
 });
