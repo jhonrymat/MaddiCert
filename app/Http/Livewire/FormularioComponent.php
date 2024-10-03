@@ -6,6 +6,7 @@ use Livewire\WithFileUploads;
 use Livewire\Component;
 use App\Models\Solicitud;
 use App\Models\Solicitante;
+use App\Models\Tsolicitante;
 
 class FormularioComponent extends Component
 {
@@ -53,20 +54,19 @@ class FormularioComponent extends Component
         'nombre2' => 'required|string|min:3',
         'apellido1' => 'required|string|min:3',
         'apellido2' => 'required|string|min:3',
-        'tipoSolicitante' => 'required|string|min:3',
-        'tipoIdentificacion' => 'required|string|min:3',
-        'numeroIdentificacion' => 'required|string|min:3',
-        'Expedicion' => 'required|string|min:3',
+        'tipoSolicitante' => 'required|string',
+        'tipoIdentificacion' => 'required|string',
+        'numeroIdentificacion' => 'required|string',
+        'Expedicion' => 'required|string',
         'telefono' => 'required|string|min:3',
-        'rangoEdad' => 'required|string|min:3',
         'genero' => 'required|string',
         'direccion' => 'required|string|min:3',
-        'poblacion' => 'required|string|min:3',
-        'ocupacion' => 'required|string|min:3',
-        'escolaridad' => 'required|string|min:3',
-        'fechaNacimiento' => 'required|string|min:3',
+        'poblacion' => 'required|string',
+        'ocupacion' => 'required|string',
+        'escolaridad' => 'required|string',
+        'fechaNacimiento' => 'required|string',
         'terminos' => 'required',
-        'observaciones' => 'required|string|min:3',
+        'observaciones' => 'required|string',
     ];
     protected $messages = [
         'nombre1.required' => 'El primer nombre es obligatorio.',
@@ -182,6 +182,10 @@ class FormularioComponent extends Component
 
     public function render()
     {
-        return view('livewire.formulario-component')->layout('layouts.tenancy');
+        $tipoSolicitantes = Tsolicitante::all();
+        
+        return view('livewire.formulario-component', [
+            'tipoSolicitantes' => $tipoSolicitantes,
+        ])->layout('layouts.tenancy');
     }
 }

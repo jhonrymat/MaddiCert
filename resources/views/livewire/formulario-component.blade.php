@@ -108,9 +108,10 @@
                 <select id="tipoSolicitante" wire:model="tipoSolicitante"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="ciudadano">Ciudadano</option>
-                    <option value="extranjero">Extranjero</option>
-                    <option value="organización">Organización</option>
+                    {{-- caragar todos los tipos de solicitantes --}}
+                    @foreach ($tipoSolicitantes as $tipoSolicitante)
+                        <option value="{{ $tipoSolicitante->id }}">{{ $tipoSolicitante->tipoSolicitante }}</option>
+                    @endforeach
                 </select>
                 @error('tipoSolicitante')
                     <span class="text-red-500">{{ $message }}</span>
