@@ -34,6 +34,7 @@ class RolesAndPermissionsTenantSeeder extends Seeder
         ];
         $permissionsUser = [
             'formulario',
+            'versolicitudes',
         ];
 
         // Crear los permisos

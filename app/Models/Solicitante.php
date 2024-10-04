@@ -34,7 +34,7 @@ class Solicitante extends Model
 
     public function tipoSolicitante()
     {
-        return $this->belongsTo(TSolicitant::class, 'id_tipoSolicitante');
+        return $this->belongsTo(TSolicitante::class, 'id_tipoSolicitante');
     }
 
     public function tipoDocumento()
