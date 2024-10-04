@@ -24,6 +24,7 @@ class Solicitante extends Model
         'id_nivelEstudio',
         'id_genero',
         'ocupacion',
+        'poblacion'
     ];
 
     public function user()

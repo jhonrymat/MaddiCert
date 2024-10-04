@@ -2,11 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Genero;
 use Livewire\WithFileUploads;
 use Livewire\Component;
 use App\Models\Solicitud;
 use App\Models\Solicitante;
 use App\Models\Tsolicitante;
+use App\Models\Nestudio;
+use App\Models\Tdocumento;
 
 class FormularioComponent extends Component
 {
@@ -183,9 +186,15 @@ class FormularioComponent extends Component
     public function render()
     {
         $tipoSolicitantes = Tsolicitante::all();
+        $tipoDocumentos = Tdocumento::all();
+        $nivelEstudios = Nestudio::all();
+        $nombreGeneros = Genero::all();
         
         return view('livewire.formulario-component', [
             'tipoSolicitantes' => $tipoSolicitantes,
+            'tipoDocumentos' => $tipoDocumentos,
+            'nivelEstudios' => $nivelEstudios,
+            'nombreGeneros' => $nombreGeneros,
         ])->layout('layouts.tenancy');
     }
 }

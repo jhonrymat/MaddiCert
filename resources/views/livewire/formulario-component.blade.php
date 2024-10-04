@@ -124,14 +124,11 @@
                 <select id="tipoIdentificacion" wire:model="tipoIdentificacion"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="RC">Registro Civil</option>
-                    <option value="TI">Tarjeta de identidad</option>
-                    <option value="CC">Cédula de ciudadanía</option>
-                    <option value="CE">Cédula extranjera</option>
-                    <option value="NIT">NIT</option>
-                    <option value="PPT">Permiso Por Protección Temporal</option>
-                    <option value="PEP">Permiso Especial de Permanencia</option>
-                    <option value="SR">Salvoconducto para refugiados</option>
+                    {{-- caragar todos los tipos de identificacion --}}
+                    @foreach ($tipoDocumentos as $tipoDocumento)
+                        <option value="{{ $tipoDocumento->id }}">{{ $tipoDocumento->tipoDocumento}}</option>
+                    @endforeach
+                   
                 </select>
                 @error('tipoIdentificacion')
                     <span class="text-red-500">{{ $message }}</span>
@@ -194,14 +191,10 @@
                 <select id="escolaridad" wire:model="escolaridad"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="Bachillerato">Bachillerato</option>
-                    <option value="Especializacion">Especialización</option>
-                    <option value="Master">Master</option>
-                    <option value="Phd">Phd</option>
-                    <option value="Primaria">Primaria</option>
-                    <option value="Profesional">Profesional</option>
-                    <option value="Tecnologico">Tecnológico</option>
-                    <option value="Tecnico">Técnico</option>
+                    {{-- cargar todos los niveles de estudio --}}
+                    @foreach ($nivelEstudios as $nivelEstudio)
+                        <option value="{{ $nivelEstudio->id }}">{{ $nivelEstudio->nivelEstudio }}</option>
+                    @endforeach
                 </select>
                 @error('escolaridad')
                     <span class="text-red-500">{{ $message }}</span>
@@ -214,8 +207,10 @@
                 <select id="genero" wire:model="genero"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="FE">Femenino</option>
-                    <option value="MA">Masculino</option>
+                    {{-- cargar todos los nombres de género --}}
+                        @foreach ($nombreGeneros as $nombreGenero)
+                            <option value="{{ $nombreGenero->id }}">{{ $nombreGenero->nombreGenero }}</option>
+                        @endforeach
                 </select>
                 @error('genero')
                     <span class="text-red-500">{{ $message }}</span>
