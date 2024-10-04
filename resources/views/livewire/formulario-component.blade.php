@@ -6,7 +6,7 @@
                 <strong class="font-bold">{{ session('message') }}</strong>
             </div>
         @endif
-        <form wire:submit.prevent="save">
+        <form wire:submit.prevent="save" enctype="multipart/form-data">
             @csrf
             <div class="mb-2 underline text-center">
                 <h2 class="text-lg">Información Básica del solicitante</h2>
@@ -97,6 +97,16 @@
                 @enderror
             </div>
 
+            {{-- correo --}}
+            <div class="mb-4">
+                <x-label for="correoElectronico" class="block text-sm font-medium">Correo*</x-label>
+                <x-input id="correoElectronico" type="email" wire:model="correoElectronico" class="mt-1 block w-full"
+                    placeholder="Ingrese el correo" />
+                @error('correo')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+
             <!-- Información personal del solicitante -->
             <div class="mb-2 mt-4 underline text-center">
                 <h2 class="text-lg">Información personal del solicitante</h2>
@@ -128,7 +138,7 @@
                     @foreach ($tipoDocumentos as $tipoDocumento)
                         <option value="{{ $tipoDocumento->id }}">{{ $tipoDocumento->tipoDocumento}}</option>
                     @endforeach
-                   
+
                 </select>
                 @error('tipoIdentificacion')
                     <span class="text-red-500">{{ $message }}</span>
@@ -163,24 +173,6 @@
                 <x-input id="fechaNacimiento" type="date" wire:model="fechaNacimiento"
                     class="mt-1 block w-full" />
                 @error('fechaNacimiento')
-                    <span class="text-red-500">{{ $message }}</span>
-                @enderror
-            </div>
-
-            <!-- Rango de Edad -->
-            <div class="mb-2 mt-4">
-                <x-label for="rangoEdad" class="block text-sm font-medium">Rango de Edad*</x-label>
-                <select id="rangoEdad" wire:model="rangoEdad"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg">
-                    <option value="" selected>Seleccione</option>
-                    <option value="5_12">Entre 5 y 12 años</option>
-                    <option value="13_17">Entre 13 y 17 años</option>
-                    <option value="18_26">Entre 18 y 26 años</option>
-                    <option value="27_40">Entre 27 y 40 años</option>
-                    <option value="41_60">Entre 41 y 60 años</option>
-                    <option value="61">Más de 61 años</option>
-                </select>
-                @error('rangoEdad')
                     <span class="text-red-500">{{ $message }}</span>
                 @enderror
             </div>
@@ -578,7 +570,7 @@
                         .swf .xls .xlsm .xlsx .zip
                     </p>
 
-                    <input id="dropzone-file" type="file" class="hidden" />
+                    <input id="dropzone-file" type="file" wire:model="anexos" class="hidden" />
                     @error('anexos')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror

@@ -3,13 +3,14 @@
 namespace App\Http\Livewire;
 
 use App\Models\Genero;
-use Livewire\WithFileUploads;
 use Livewire\Component;
+use App\Models\Nestudio;
 use App\Models\Solicitud;
+use App\Models\Tdocumento;
 use App\Models\Solicitante;
 use App\Models\Tsolicitante;
-use App\Models\Nestudio;
-use App\Models\Tdocumento;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class FormularioComponent extends Component
 {
@@ -39,7 +40,6 @@ class FormularioComponent extends Component
     public $Expedicion = '';
     public $tipoSolicitante = '';
     public $telefono = '';
-    public $rangoEdad = '';
     public $genero = '';
     public $direccion = '';
     public $poblacion = '';
@@ -49,6 +49,7 @@ class FormularioComponent extends Component
     public $terminos = '';
     public $observaciones = '';
     public $anexos = '';
+    public $correoElectronico = '';
 
 
 
@@ -70,6 +71,8 @@ class FormularioComponent extends Component
         'fechaNacimiento' => 'required|string',
         'terminos' => 'required',
         'observaciones' => 'required|string',
+        'correoElectronico' => 'required|email',
+        'anexos' => 'required|file|mimes:pdf,jpeg,png,jpg,doc,docx|max:10240',
     ];
     protected $messages = [
         'nombre1.required' => 'El primer nombre es obligatorio.',
@@ -99,9 +102,6 @@ class FormularioComponent extends Component
         'telefono.required' => 'El teléfono es obligatorio.',
         'telefono.min' => 'El teléfono debe tener al menos 3 caracteres.',
 
-        'rangoEdad.required' => 'El rango de edad es obligatorio.',
-        'rangoEdad.min' => 'El rango de edad debe tener al menos 3 caracteres.',
-
         'genero.required' => 'El género es obligatorio.',
         'genero.min' => 'El género debe tener al menos 3 caracteres.',
 
@@ -128,7 +128,6 @@ class FormularioComponent extends Component
         'observaciones.min' => 'Las observaciones deben tener al menos 3 caracteres.',
 
         'anexos.required' => 'Los anexos son obligatorios.',
-        'anexos.min' => 'Los anexos deben tener al menos 3 caracteres.',
     ];
 
 
@@ -138,22 +137,18 @@ class FormularioComponent extends Component
         // Validate form data
         $validatedData = $this->validate();
 
-        if ($this->anexos) {
-            $anexoPath = $this->anexos->store('anexos', 'public'); // Store file in 'storage/app/public/anexos'
-        }
+
 
         // First, create or update the solicitante
-        $solicitante = Solicitante::updateOrCreate(
-            [
-                'numeroIdentificacion' => $this->numeroIdentificacion,
-            ],
-            [
+        $solicitante = Solicitante::Create([
                 'user_id' => auth()->id(),  // Assuming you have the user ID
                 'nombre_1' => $this->nombre1,
                 'nombre_2' => $this->nombre2,
                 'apellido_1' => $this->apellido1,
                 'apellido_2' => $this->apellido2,
                 'telefonoContacto' => $this->telefono,
+                'correoElectronico' => $this->correoElectronico,
+                'numeroIdentificacion' => $this->numeroIdentificacion,
                 'id_tipoSolicitante' => $this->tipoSolicitante,
                 'id_tipoDocumento' => $this->tipoIdentificacion,
                 'ciudadExpedicion' => $this->Expedicion,
@@ -164,6 +159,9 @@ class FormularioComponent extends Component
             ]
         );
 
+        if ($this->anexos) {
+            $link = Storage::put('anexos', $this->anexos);
+         }
         // Create a new solicitud
         Solicitud::create([
             'id_solicitante' => $solicitante->id,
@@ -171,7 +169,7 @@ class FormularioComponent extends Component
             'id_barrio' => 1, // Assuming barrio is 1 for now, replace with actual value
             'direccion' => $this->direccion,
             'ubicacion' => 'N/A', // Replace with actual data if applicable
-            'evidenciaPDF' => $anexoPath ?? '',  // Handle file uploads separately
+            'evidenciaPDF' => $link ?? '',  // Handle file uploads separately
         ]);
 
         // Show success message
@@ -189,7 +187,7 @@ class FormularioComponent extends Component
         $tipoDocumentos = Tdocumento::all();
         $nivelEstudios = Nestudio::all();
         $nombreGeneros = Genero::all();
-        
+
         return view('livewire.formulario-component', [
             'tipoSolicitantes' => $tipoSolicitantes,
             'tipoDocumentos' => $tipoDocumentos,

@@ -47,10 +47,10 @@ class SolicitudesDatatable extends DataTableComponent
             Column::make("Created at", "created_at")
                 ->sortable()
                 ->searchable(),
-            Column::make("Acciones")
-                ->label(
-                    fn($row) => view('livewire.acciones', ['row' => $row])
-                )
+            // Column::make("Acciones")
+            //     ->label(
+            //         fn($row) => view('livewire.acciones', ['row' => $row])
+            //     )
         ];
     }
 }

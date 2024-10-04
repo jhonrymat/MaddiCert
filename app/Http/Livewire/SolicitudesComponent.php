@@ -8,7 +8,7 @@ use App\Models\Solicitud;
 class SolicitudesComponent extends Component
 {
 
-        
+
     public $id_solicitante;
     public $numeroIdentificacion;
     public $id_barrio;
@@ -23,14 +23,15 @@ class SolicitudesComponent extends Component
         }
     }
 
-  
+
 
     public function render()
     {
-        $solicitudes = Solicitud::where('id_solicitante', $this->id_solicitante)->get();
-       
+        $user = auth()->user();
+        $solicitudes = Solicitud::where('id_solicitante', $user->id)->get();
 
-        return view('livewire.solicitudes-component', [ 
+
+        return view('livewire.solicitudes-component', [
             'solicitudes'=>$solicitudes,
         ])->layout('layouts.tenancy');
     }
