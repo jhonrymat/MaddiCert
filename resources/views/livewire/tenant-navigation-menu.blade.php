@@ -56,12 +56,15 @@
                             </x-dropdown>
                         </div>
                         <x-nav-link href="{{ route('solicitudes') }}" :active="request()->routeIs('solicitudes')">
-                            {{ __('Solicitudes') }}
+                            {{ __('solicitudes') }}
                         </x-nav-link>
                     @endrole
                     @role('user')
                         <x-nav-link href="{{ route('formulario') }}" :active="request()->routeIs('formulario')">
                             {{ __('Solicitud') }}
+                        </x-nav-link>
+                        <x-nav-link href="{{ route('versolicitudes') }}" :active="request()->routeIs('versolicitudes')">
+                            {{ __('solicitudes') }}
                         </x-nav-link>
                     @endrole
                 </div>

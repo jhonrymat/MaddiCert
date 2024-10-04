@@ -6,7 +6,7 @@
                 <strong class="font-bold">{{ session('message') }}</strong>
             </div>
         @endif
-        <form wire:submit.prevent="save">
+        <form wire:submit.prevent="save" enctype="multipart/form-data">
             @csrf
             <div class="mb-2 underline text-center">
                 <h2 class="text-lg">Información Básica del solicitante</h2>
@@ -97,6 +97,16 @@
                 @enderror
             </div>
 
+            {{-- correo --}}
+            <div class="mb-4">
+                <x-label for="correoElectronico" class="block text-sm font-medium">Correo*</x-label>
+                <x-input id="correoElectronico" type="email" wire:model="correoElectronico" class="mt-1 block w-full"
+                    placeholder="Ingrese el correo" />
+                @error('correo')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+
             <!-- Información personal del solicitante -->
             <div class="mb-2 mt-4 underline text-center">
                 <h2 class="text-lg">Información personal del solicitante</h2>
@@ -124,14 +134,11 @@
                 <select id="tipoIdentificacion" wire:model="tipoIdentificacion"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="RC">Registro Civil</option>
-                    <option value="TI">Tarjeta de identidad</option>
-                    <option value="CC">Cédula de ciudadanía</option>
-                    <option value="CE">Cédula extranjera</option>
-                    <option value="NIT">NIT</option>
-                    <option value="PPT">Permiso Por Protección Temporal</option>
-                    <option value="PEP">Permiso Especial de Permanencia</option>
-                    <option value="SR">Salvoconducto para refugiados</option>
+                    {{-- caragar todos los tipos de identificacion --}}
+                    @foreach ($tipoDocumentos as $tipoDocumento)
+                        <option value="{{ $tipoDocumento->id }}">{{ $tipoDocumento->tipoDocumento}}</option>
+                    @endforeach
+
                 </select>
                 @error('tipoIdentificacion')
                     <span class="text-red-500">{{ $message }}</span>
@@ -170,38 +177,16 @@
                 @enderror
             </div>
 
-            <!-- Rango de Edad -->
-            <div class="mb-2 mt-4">
-                <x-label for="rangoEdad" class="block text-sm font-medium">Rango de Edad*</x-label>
-                <select id="rangoEdad" wire:model="rangoEdad"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg">
-                    <option value="" selected>Seleccione</option>
-                    <option value="5_12">Entre 5 y 12 años</option>
-                    <option value="13_17">Entre 13 y 17 años</option>
-                    <option value="18_26">Entre 18 y 26 años</option>
-                    <option value="27_40">Entre 27 y 40 años</option>
-                    <option value="41_60">Entre 41 y 60 años</option>
-                    <option value="61">Más de 61 años</option>
-                </select>
-                @error('rangoEdad')
-                    <span class="text-red-500">{{ $message }}</span>
-                @enderror
-            </div>
-
             <!-- Nivel de estudio -->
             <div class="mb-2 mt-4">
                 <x-label for="escolaridad" class="block text-sm font-medium">Nivel de estudio*</x-label>
                 <select id="escolaridad" wire:model="escolaridad"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="Bachillerato">Bachillerato</option>
-                    <option value="Especializacion">Especialización</option>
-                    <option value="Master">Master</option>
-                    <option value="Phd">Phd</option>
-                    <option value="Primaria">Primaria</option>
-                    <option value="Profesional">Profesional</option>
-                    <option value="Tecnologico">Tecnológico</option>
-                    <option value="Tecnico">Técnico</option>
+                    {{-- cargar todos los niveles de estudio --}}
+                    @foreach ($nivelEstudios as $nivelEstudio)
+                        <option value="{{ $nivelEstudio->id }}">{{ $nivelEstudio->nivelEstudio }}</option>
+                    @endforeach
                 </select>
                 @error('escolaridad')
                     <span class="text-red-500">{{ $message }}</span>
@@ -214,8 +199,10 @@
                 <select id="genero" wire:model="genero"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="FE">Femenino</option>
-                    <option value="MA">Masculino</option>
+                    {{-- cargar todos los nombres de género --}}
+                        @foreach ($nombreGeneros as $nombreGenero)
+                            <option value="{{ $nombreGenero->id }}">{{ $nombreGenero->nombreGenero }}</option>
+                        @endforeach
                 </select>
                 @error('genero')
                     <span class="text-red-500">{{ $message }}</span>
@@ -583,7 +570,7 @@
                         .swf .xls .xlsm .xlsx .zip
                     </p>
 
-                    <input id="dropzone-file" type="file" class="hidden" />
+                    <input id="dropzone-file" type="file" wire:model="anexos" class="hidden" />
                     @error('anexos')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
