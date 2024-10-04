@@ -97,6 +97,16 @@
                 @enderror
             </div>
 
+            <!-- Correo -->
+            <div class="mb-4">
+                <x-label for="correo" class="block text-sm font-medium">Correo*</x-label>
+                <x-input id="correo" type="text" wire:model="correo" class="mt-1 block w-full"
+                    placeholder="Ingrese el correo" />
+                @error('correo')
+                    <span class="text-red-500">{{ $message }}</span>
+                @enderror
+            </div>
+
             <!-- Información personal del solicitante -->
             <div class="mb-2 mt-4 underline text-center">
                 <h2 class="text-lg">Información personal del solicitante</h2>
@@ -109,6 +119,7 @@
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
                     {{-- caragar todos los tipos de solicitantes --}}
+                    <option value="1">normal</option>
                     @foreach ($tipoSolicitantes as $tipoSolicitante)
                         <option value="{{ $tipoSolicitante->id }}">{{ $tipoSolicitante->tipoSolicitante }}</option>
                     @endforeach
@@ -124,14 +135,7 @@
                 <select id="tipoIdentificacion" wire:model="tipoIdentificacion"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="RC">Registro Civil</option>
-                    <option value="TI">Tarjeta de identidad</option>
-                    <option value="CC">Cédula de ciudadanía</option>
-                    <option value="CE">Cédula extranjera</option>
-                    <option value="NIT">NIT</option>
-                    <option value="PPT">Permiso Por Protección Temporal</option>
-                    <option value="PEP">Permiso Especial de Permanencia</option>
-                    <option value="SR">Salvoconducto para refugiados</option>
+                    <option value="1">Registro Civil</option>
                 </select>
                 @error('tipoIdentificacion')
                     <span class="text-red-500">{{ $message }}</span>
@@ -170,38 +174,15 @@
                 @enderror
             </div>
 
-            <!-- Rango de Edad -->
-            <div class="mb-2 mt-4">
-                <x-label for="rangoEdad" class="block text-sm font-medium">Rango de Edad*</x-label>
-                <select id="rangoEdad" wire:model="rangoEdad"
-                    class="mt-1 block w-full border border-gray-300 rounded-lg">
-                    <option value="" selected>Seleccione</option>
-                    <option value="5_12">Entre 5 y 12 años</option>
-                    <option value="13_17">Entre 13 y 17 años</option>
-                    <option value="18_26">Entre 18 y 26 años</option>
-                    <option value="27_40">Entre 27 y 40 años</option>
-                    <option value="41_60">Entre 41 y 60 años</option>
-                    <option value="61">Más de 61 años</option>
-                </select>
-                @error('rangoEdad')
-                    <span class="text-red-500">{{ $message }}</span>
-                @enderror
-            </div>
-
+            
             <!-- Nivel de estudio -->
             <div class="mb-2 mt-4">
                 <x-label for="escolaridad" class="block text-sm font-medium">Nivel de estudio*</x-label>
                 <select id="escolaridad" wire:model="escolaridad"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="Bachillerato">Bachillerato</option>
-                    <option value="Especializacion">Especialización</option>
-                    <option value="Master">Master</option>
-                    <option value="Phd">Phd</option>
-                    <option value="Primaria">Primaria</option>
-                    <option value="Profesional">Profesional</option>
-                    <option value="Tecnologico">Tecnológico</option>
-                    <option value="Tecnico">Técnico</option>
+                    <option value="1">Bachillerato</option>
+    
                 </select>
                 @error('escolaridad')
                     <span class="text-red-500">{{ $message }}</span>
@@ -214,8 +195,7 @@
                 <select id="genero" wire:model="genero"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="FE">Femenino</option>
-                    <option value="MA">Masculino</option>
+                    <option value="1">Femenino</option>
                 </select>
                 @error('genero')
                     <span class="text-red-500">{{ $message }}</span>
@@ -228,26 +208,8 @@
                 <select id="ocupacion" wire:model="ocupacion"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="Desempleado">Desempleado</option>
-                    <option value="Empleado">Empleado</option>
-                    <option value="Estudiante">Estudiante</option>
-                    <option value="Funcionario Publico">Funcionario Público</option>
-                    <option value="Ama de Casa">Ama de Casa</option>
-                    <option value="Miembro de Fuerzas Militares">Miembro de Fuerzas Militares</option>
-                    <option value="Medico">Médico</option>
-                    <option value="Enfermero">Enfermero(a)</option>
-                    <option value="Ingeniero">Ingeniero(a)</option>
-                    <option value="Abogado">Abogado(a)</option>
-                    <option value="Administrador">Administrador(a)</option>
-                    <option value="Veterinario">Veterinario(a)</option>
-                    <option value="Contador">Contador(a)</option>
-                    <option value="Tecnico">Técnico(a)</option>
-                    <option value="Plomero">Plomero(a)</option>
-                    <option value="Electricista">Electricista</option>
-                    <option value="Chofer">Chofer/Conductor</option>
-                    <option value="Agricultor">Agricultor(a)</option>
-                    <option value="Comerciante">Comerciante</option>
-                    <option value="Docente">Docente/Profesor(a)</option>
+                    <option value="1">Desempleado</option>
+  
                 </select>
                 @error('ocupacion')
                     <span class="text-red-500">{{ $message }}</span>
@@ -260,18 +222,8 @@
                 <select id="poblacion" wire:model="poblacion"
                     class="mt-1 block w-full border border-gray-300 rounded-lg">
                     <option value="" selected>Seleccione</option>
-                    <option value="Afro">Afrocolombiano, Palenquero, Raizal</option>
-                    <option value="Calle">Habitante de la calle</option>
-                    <option value="Madre">Madre cabeza de familia</option>
-                    <option value="Pobreza">Pobreza extrema (SISBEN 1)</option>
-                    <option value="Victima">Víctima de la violencia</option>
-                    <option value="Privado">Privado de la libertad</option>
-                    <option value="Desplazado">Desplazado</option>
-                    <option value="Indigena">Indígena</option>
-                    <option value="LGTBI">LGTBI</option>
-                    <option value="Rom">Rom o Gitano</option>
-                    <option value="Ninguna">Ninguna</option>
-                    <option value="Otra">Otra</option>
+                    <option value="1">Afrocolombiano, Palenquero, Raizal</option>
+
                 </select>
                 @error('poblacion')
                     <span class="text-red-500">{{ $message }}</span>

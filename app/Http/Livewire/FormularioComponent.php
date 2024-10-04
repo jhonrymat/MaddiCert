@@ -36,7 +36,7 @@ class FormularioComponent extends Component
     public $Expedicion = '';
     public $tipoSolicitante = '';
     public $telefono = '';
-    public $rangoEdad = '';
+    public $correo = '';
     public $genero = '';
     public $direccion = '';
     public $poblacion = '';
@@ -59,6 +59,7 @@ class FormularioComponent extends Component
         'numeroIdentificacion' => 'required|string',
         'Expedicion' => 'required|string',
         'telefono' => 'required|string|min:3',
+        'correo' => 'required|string|min:3',
         'genero' => 'required|string',
         'direccion' => 'required|string|min:3',
         'poblacion' => 'required|string',
@@ -96,8 +97,9 @@ class FormularioComponent extends Component
         'telefono.required' => 'El teléfono es obligatorio.',
         'telefono.min' => 'El teléfono debe tener al menos 3 caracteres.',
 
-        'rangoEdad.required' => 'El rango de edad es obligatorio.',
-        'rangoEdad.min' => 'El rango de edad debe tener al menos 3 caracteres.',
+        'correo.required' => 'El correo es obligatorio.',
+        'correo.min' => 'El correo debe tener al menos 3 caracteres.',
+
 
         'genero.required' => 'El género es obligatorio.',
         'genero.min' => 'El género debe tener al menos 3 caracteres.',
@@ -151,6 +153,7 @@ class FormularioComponent extends Component
                 'apellido_1' => $this->apellido1,
                 'apellido_2' => $this->apellido2,
                 'telefonoContacto' => $this->telefono,
+                'correoElectronico' => $this->correo,
                 'id_tipoSolicitante' => $this->tipoSolicitante,
                 'id_tipoDocumento' => $this->tipoIdentificacion,
                 'ciudadExpedicion' => $this->Expedicion,
@@ -158,6 +161,7 @@ class FormularioComponent extends Component
                 'id_nivelEstudio' => $this->escolaridad,
                 'id_genero' => $this->genero,
                 'ocupacion' => $this->ocupacion,
+                'direccion' => $this->direccion,
             ]
         );
 
