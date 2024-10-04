@@ -19,8 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $cachePath = base_path('bootstrap/cache');
-
-        mkdir($cachePath, 0755, true);
+        //
     }
 }
