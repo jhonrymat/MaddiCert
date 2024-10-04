@@ -45,7 +45,7 @@
                 @enderror
             </div>
 
-            {{-- nombre 2 --}}
+            {{-- nombre 2 --}}os
             <div class="mb-4 relative">
                 <div class="flex items-center">
                     <x-label for="nombre2" class="block text-sm font-medium text-gray-700">Segundo nombre*</x-label>
@@ -535,7 +535,7 @@
                         .swf .xls .xlsm .xlsx .zip
                     </p>
 
-                    <input id="dropzone-file" type="file" class="hidden" />
+                    <input id="dropzone-file" type="file" wire:model="anexos" class="hidden" />
                     @error('anexos')
                         <span class="text-red-500">{{ $message }}</span>
                     @enderror
